@@ -1,0 +1,18 @@
+﻿Build started 2016/3/23 22:02:49.
+     1>Project "F:\vs2013project\windowsProgram\Sysmets2\Sysmets2\Sysmets2.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\Sysmets2.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         E:\vs2013\VC\bin\CL.exe /c /I"F:\公司\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Sysmets.cpp
+         Sysmets.cpp
+       Link:
+         E:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\vs2013project\windowsProgram\Sysmets2\Debug\Sysmets2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"F:\公司\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\vs2013project\windowsProgram\Sysmets2\Debug\Sysmets2.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\vs2013project\windowsProgram\Sysmets2\Debug\Sysmets2.lib" /MACHINE:X86 Debug\Sysmets.obj
+         Sysmets2.vcxproj -> F:\vs2013project\windowsProgram\Sysmets2\Debug\Sysmets2.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\Sysmets2.tlog\unsuccessfulbuild".
+         Touching "Debug\Sysmets2.tlog\Sysmets2.lastbuildstate".
+     1>Done Building Project "F:\vs2013project\windowsProgram\Sysmets2\Sysmets2\Sysmets2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.86
