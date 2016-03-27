@@ -65,12 +65,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)/
 
 
 	static int  cxChar, cxCaps, cyChar, cxClient, cyClient, iMaxWidth;
+	static int iDeltaPerLine, iAccumDelta; //for mouse wheel logic
 	HDC hdc;
 	int i, x, y, iVertPos, iHorzPos, iPaintBeg, iPaintEnd;
 	PAINTSTRUCT ps;
 	SCROLLINFO si;
 	TCHAR szBuffer[10];
 	TEXTMETRIC tm;
+	ULONG ulScrollLines; // for mouse wheel logic
 	switch (message)
 	{
 	case WM_CREATE:
@@ -83,7 +85,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)/
 		ReleaseDC(hwnd, hdc);
 		// Save the width of the three columns
 		iMaxWidth = 40 * cxChar + 22 * cxCaps;
-
+	case WM_SETTINGCHANGE:
+		SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0,
+			&ulScrollLines, 0);//´«»Ø3
+		// ulScrollLines usually equals 3 or 0 (for no scrolling)
+		// WHEEL_DELTA equals 120, so iDeltaPerLine will be 40
+		if (ulScrollLines)
+			iDeltaPerLine = WHEEL_DELTA / ulScrollLines;
+		else
+			iDeltaPerLine = 0;
 		return 0;
 	case WM_SIZE:
 		cxClient = LOWORD(lParam);
@@ -217,6 +227,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)/
 		case VK_RIGHT:
 			SendMessage(hwnd, WM_HSCROLL, SB_PAGEDOWN, 0);
 			break;
+		}
+		return 0;
+	case WM_MOUSEWHEEL:
+		if (iDeltaPerLine == 0)
+			break;
+		iAccumDelta += (short)HIWORD(wParam); // 120 or -120
+		while (iAccumDelta >= iDeltaPerLine)
+		{
+			SendMessage(hwnd, WM_VSCROLL, SB_LINEUP, 0);
+			iAccumDelta -= iDeltaPerLine;
+		}
+		while (iAccumDelta <= -iDeltaPerLine)
+		{
+			SendMessage(hwnd, WM_VSCROLL, SB_LINEDOWN, 0);
+			iAccumDelta += iDeltaPerLine;
 		}
 		return 0;
 	case WM_PAINT:
